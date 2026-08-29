@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COLORFUL PRINT STYLES — applies to ALL print / PDF exports
+   Preserves colors, backgrounds, gradients, badges
+   ═══════════════════════════════════════════════════════════ */
+@media print {
+  /* Force color printing — never grayscale */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Page setup */
+  @page {
+    margin: 12mm 10mm;
+    size: A4 landscape;
+  }
+
+  /* Hide interactive / navigation UI */
+  .no-print,
+  button:not(.print-keep),
+  nav, aside,
+  [data-radix-popper-content-wrapper],
+  .fixed.bottom-0,
+  .fixed.top-0 {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif !important;
+    font-size: 11px !important;
+    color: #0f172a !important;
+  }
+
+  /* Tables */
+  table { border-collapse: collapse !important; width: 100% !important; }
+  th {
+    background: #1e293b !important;
+    color: #fff !important;
+    padding: 6px 10px !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    border: none !important;
+  }
+  td {
+    padding: 5px 10px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    font-size: 10px !important;
+  }
+  tr:nth-child(even) td { background: #f8fafc !important; }
+  tr:hover td { background: inherit !important; }
+
+  /* KPI / Stat cards — keep their gradients */
+  .kc, [class*="kpi"], [class*="stat-card"] {
+    break-inside: avoid !important;
+    box-shadow: none !important;
+  }
+
+  /* Color badges keep their colors */
+  .badge, [class*="badge"], span[style*="background"] {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Cards */
+  .card, [class*="card"] {
+    border: 1px solid #e2e8f0 !important;
+    break-inside: avoid !important;
+    box-shadow: none !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Charts */
+  canvas, svg { break-inside: avoid !important; }
+
+  /* Gradient headers keep color */
+  [style*="linear-gradient"] {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Remove rounded corners that sometimes clip */
+  .rounded-full, [class*="rounded"] { border-radius: 4px !important; }
+
+  /* Page breaks */
+  .page-break-before { page-break-before: always !important; }
+  .page-break-after  { page-break-after: always !important; }
+  .no-page-break     { page-break-inside: avoid !important; }
+
+  /* Print header / title */
+  .print-title {
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    margin-bottom: 4px !important;
+  }
+  .print-subtitle {
+    font-size: 10px !important;
+    color: #64748b !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Status badges — keep their colors */
+  .bg-green-100  { background: #dcfce7 !important; }
+  .bg-red-100    { background: #fee2e2 !important; }
+  .bg-yellow-100 { background: #fef9c3 !important; }
+  .bg-blue-100   { background: #dbeafe !important; }
+  .bg-orange-100 { background: #ffedd5 !important; }
+  .bg-purple-100 { background: #f3e8ff !important; }
+  .text-green-700  { color: #15803d !important; }
+  .text-red-700    { color: #b91c1c !important; }
+  .text-yellow-700 { color: #a16207 !important; }
+  .text-blue-700   { color: #1d4ed8 !important; }
+  .text-orange-600 { color: #ea580c !important; }
+  .text-purple-700 { color: #7e22ce !important; }
+}
+
+/* ── printTable helper used in fleet/accounting pages ─────────────────────
+   Inject this CSS into the popup print window for colorful PDF exports    */
+.print-window-styles {
+  font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif;
+  padding: 20px;
+  font-size: 12px;
+  color: #0f172a;
+}
+.print-window-styles h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.print-window-styles .subtitle {
+  font-size: 11px;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+.print-window-styles table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.print-window-styles th {
+  background: #1e293b !important;
+  color: #fff !important;
+  padding: 7px 12px;
+  font-size: 10px;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.print-window-styles td {
+  padding: 6px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 11px;
+}
+.print-window-styles tr:nth-child(even) td {
+  background: #f8fafc;
+}
+.print-window-styles .footer {
+  font-size: 9px;
+  color: #94a3b8;
+  margin-top: 14px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 8px;
+}
